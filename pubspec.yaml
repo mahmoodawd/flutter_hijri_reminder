@@ -1,0 +1,90 @@
+name: hijri_reminder
+description: Flutter application its main function to convert Gregorian dates to Hijri dates and add reminders for them.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #For Date operations
+
+  flutter_datetime_picker: ^1.5.0
+  hijri: ^3.0.0
+  intl: ^0.18.0
+
+  #State management package
+  provider: ^6.0.5
+
+  #For DB
+  sqflite: ^2.0.0+4
+  path: ^1.8.0
+
+  #For local Notifications
+  flutter_local_notifications: ^13.0.0
+  flutter_native_timezone: ^2.0.0
+
+  #For Splash screen
+  flutter_native_splash: ^2.2.16
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  #Launcher icons section
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
+
+#Splash Screen section
+
+  flutter_native_splash: ^1.2.3
+flutter_native_splash:
+
+  # Only one parameter can be used, color and background_image cannot both be set.
+  color: "#ffffff"
+  # background_image: "assets/images/app_icon"
+  image: assets/images/app_icon.png
+  android_gravity: center
+  fullscreen: true
+
+
+
+
+
+# The following section is specific to Flutter.
+flutter:
+
+  
+  uses-material-design: true
+
+  #App resources like images, fonts, sounds, etc..
+  assets:
+    - assets/images/
+    - assets/fonts/
+
+ # App fonts goes here:
+  fonts:
+  # For Arabic 
+    - family: Vibes
+      fonts:
+        - asset: assets/fonts/arabic/Vibes-Regular.ttf
+    - family: Rakkas
+      fonts:
+        - asset: assets/fonts/arabic/Rakkas-Regular.ttf
+  # For English 
+    - family: Ephesis
+      fonts:
+        - asset: assets/fonts/english/Ephesis-Regular.ttf
+
