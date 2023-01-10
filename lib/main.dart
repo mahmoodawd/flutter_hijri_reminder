@@ -6,8 +6,8 @@ import 'services/notifications_service.dart';
 import 'providers/theme.dart';
 import 'providers/user_events.dart';
 import 'providers/public_events.dart';
-import 'shared/constants.dart';
 
+import 'utils/styles.dart';
 import 'screens/settings_screen.dart';
 import 'screens/events_screen.dart';
 import 'screens/app_home.dart';
@@ -19,70 +19,52 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
+
+  void getCurrentAppTheme() async {
+    themeChangeProvider.darkThemeStatus =
+        await themeChangeProvider.darkThemePreference.getDarkThemeStatus();
+  }
+
+  @override
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: PublicEvents(),
-        ),
-        ChangeNotifierProvider.value(
-          value: UserEvents(),
-        ),
-        ChangeNotifierProvider.value(
-          value: ThemeChanger(ThemeMode.system),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Hijri-Reminder',
-        theme: ThemeData(
-          primarySwatch: lightModePrimaryColor,
-          iconTheme: IconThemeData(color: lightModePrimaryColor),
-          fontFamily: 'Rakkas',
-          textTheme: TextTheme(
-            headline1: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: lightModePrimaryColor,
-            ),
-            bodyText2: TextStyle(
-              color: lightModePrimaryColor,
-              fontSize: 15.0,
-              fontWeight: FontWeight.w600,
-            ),
+        providers: [
+          ChangeNotifierProvider.value(
+            value: PublicEvents(),
           ),
-        ),
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.grey,
-          buttonTheme: ButtonThemeData(
-            buttonColor: darkModePrimaryColor,
-            highlightColor: Colors.white,
-            textTheme: ButtonTextTheme.primary,
+          ChangeNotifierProvider.value(
+            value: UserEvents(),
           ),
-          fontFamily: 'Rakkas',
-          textTheme: TextTheme(
-            headline1: TextStyle(
-                fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white),
-            bodyText2: TextStyle(
-              color: Colors.white,
-              fontSize: 15.0,
-              fontWeight: FontWeight.w600,
-            ),
+          ChangeNotifierProvider.value(
+            value: themeChangeProvider,
           ),
-        ),
-        // themeMode: Provider.of<ThemeChanger>(context).getTheme(),
-        themeMode: ThemeMode.light,
-        home: AppHome(),
-        routes: {
-          EventsScreen.routeName: (ctx) => EventsScreen(),
-          // SavedEventsScreen.routeName: (ctx) => SavedEventsScreen(),
-          SettingsScreen.routeName: (ctx) => SettingsScreen(),
-        },
-      ),
-    );
+        ],
+        child: Consumer<DarkThemeProvider>(
+            builder: (BuildContext context, theme, Widget child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Hijri-Reminder',
+            theme: Styles.themeData(theme.darkThemeStatus, context),
+            home: AppHome(),
+            routes: {
+              EventsScreen.routeName: (ctx) => EventsScreen(),
+              SettingsScreen.routeName: (ctx) => SettingsScreen(),
+            },
+          );
+        }));
   }
 }

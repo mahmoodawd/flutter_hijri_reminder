@@ -46,6 +46,7 @@ class UserEventWidget extends StatelessWidget {
               ),
               IconButton(
                   onPressed: this.deletetionAction,
+                  highlightColor: Color.fromARGB(255, 240, 106, 126),
                   icon: Icon(
                     Icons.delete,
                     color: Colors.red,

@@ -33,6 +33,7 @@ dependencies:
 
   #For Splash screen
   flutter_native_splash: ^2.2.16
+  shared_preferences: ^2.0.15
   
 
 dev_dependencies:
@@ -54,8 +55,10 @@ flutter_native_splash:
 
   # Only one parameter can be used, color and background_image cannot both be set.
   color: "#ffffff"
+  color_dark: "#050c0c"
+
   # background_image: "assets/images/app_icon"
-  image: assets/images/app_icon.png
+  image: assets/images/app_splash.png
   android_gravity: center
   fullscreen: true
 

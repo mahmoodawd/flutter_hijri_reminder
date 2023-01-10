@@ -1,4 +1,4 @@
-import '../shared/static_data.dart';
+import '../utils/static_data.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

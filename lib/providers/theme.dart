@@ -1,12 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
-class ThemeChanger with ChangeNotifier {
-  ThemeMode _themeMode;
+import '../services/storage_service.dart';
 
-  ThemeChanger(this._themeMode);
-  getTheme() => _themeMode;
-  setTheme(ThemeMode theme) {
-    this._themeMode = theme;
+class DarkThemeProvider with ChangeNotifier {
+  DarkThemePreference darkThemePreference = DarkThemePreference();
+  bool _isDark = false;
+
+  bool get darkThemeStatus => _isDark;
+
+  set darkThemeStatus(bool value) {
+    _isDark = value;
+    darkThemePreference.setDarkThemeStatus(value);
     notifyListeners();
   }
 }

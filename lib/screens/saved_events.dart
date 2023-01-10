@@ -47,10 +47,10 @@ class _SavedEvent extends State<SavedEvents> {
                         ),
                         deviceOrientation == Orientation.portrait
                             ? Image.asset(
-                                'assets/images/sad.png',
+                                'assets/images/app_icon.png',
                                 fit: BoxFit.contain,
                                 alignment: Alignment.center,
-                                height: 350,
+                                height: 300,
                               )
                             : Container(),
                       ]),

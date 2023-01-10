@@ -22,8 +22,6 @@ class _DialogWidgetState extends State<DialogWidget> {
         children: [
           Text(
             widget.hijriDate,
-            style:
-                TextStyle(fontSize: 20, color: Theme.of(context).primaryColor),
           ),
           TextFormField(
               controller: _titleController,

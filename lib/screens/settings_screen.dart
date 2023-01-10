@@ -10,17 +10,15 @@ class SettingsScreen extends StatefulWidget {
   const SettingsScreen({key}) : super(key: key);
 
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  IconData darkModeSwitcher = Icons.toggle_off_outlined;
-  // bool _isDark = false;
-  // TextEditingController _modeController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    ThemeChanger _themeChanger = Provider.of<ThemeChanger>(context);
+    var darkThemeProvider = Provider.of<DarkThemeProvider>(context);
+    bool isDark = darkThemeProvider.darkThemeStatus;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -28,69 +26,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: ListView(
         children: [
           ListTile(
-            title: Text('APP THEME'),
+            title: Text('Theme Mode'),
             trailing: IconButton(
+              onPressed: () {
+                isDark = !isDark;
+                darkThemeProvider.darkThemeStatus = isDark;
+              },
               icon: Icon(
-                Icons.brightness_7_outlined,
-                size: 30,
-              ),
-              onPressed: () => showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      scrollable: true,
-                      content: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextButton.icon(
-                            icon: Icon(Icons.light_mode_rounded),
-                            label: Text('Light'),
-                            onPressed: () {
-                              _themeChanger.setTheme(ThemeMode.light);
-
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          TextButton.icon(
-                            icon: Icon(Icons.dark_mode_rounded),
-                            label: Text('Dark'),
-                            onPressed: () {
-                              _themeChanger.setTheme(ThemeMode.dark);
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          TextButton.icon(
-                            icon: Icon(Icons.settings_display_sharp),
-                            label: Text('Same as System'),
-                            onPressed: () {
-                              _themeChanger.setTheme(ThemeMode.system);
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ),
-                      // actions: [
-                      // TextButton(
-                      //   child: Text('Save'),
-                      //   onPressed: _changeAppTheme,
-                      // ),
-                      // ],
-                    );
-                  }),
+                  isDark ? Icons.lightbulb_outline : Icons.lightbulb_rounded),
+              color: Theme.of(context).iconTheme.color,
+              iconSize: 30,
             ),
           ),
         ],
       ),
     );
   }
-
-  // void _changeAppTheme() {
-  //   setState(() {
-  //     darkModeSwitcher =
-  //         _isDark ? Icons.toggle_on_outlined : Icons.toggle_off_outlined;
-
-  //     _isDark = !_isDark;
-  //   });
-  //   appMode = _isDark ? ThemeMode.dark : ThemeMode.light;
-  // }
 }
