@@ -5,17 +5,50 @@ class EventItem {
   final String eventId;
   final HijriCalendar date;
   final String title;
+  int daysRemain;
+
   EventItem({
     @required this.eventId,
     @required this.date,
     @required this.title,
-  });
+  }) {
+    _calcRemainingDays();
+  }
 
-  int get remainingDays {
+  _calcRemainingDays() {
     var eventDateInGregorian = HijriCalendar()
         .hijriToGregorian(this.date.hYear, this.date.hMonth, this.date.hDay);
-    return int.parse(
-        eventDateInGregorian.difference(DateTime.now()).inDays.toString());
+    int diffInDays = eventDateInGregorian.difference(DateTime.now()).inDays;
+    if (diffInDays == 0 && DateTime.now().day < eventDateInGregorian.day) {
+      diffInDays = 1;
+    } else if (diffInDays == 0 &&
+        DateTime.now().day > eventDateInGregorian.day) {
+      diffInDays = -1;
+    }
+    print(" difference for $title : $diffInDays");
+    daysRemain = diffInDays;
+  }
+
+  String get remainingDays {
+    String equivelentString = '';
+    switch (daysRemain) {
+      case (0):
+        equivelentString = 'today';
+        break;
+      case (-1):
+        equivelentString = 'Yesterday';
+        break;
+      case (1):
+        equivelentString = 'tommorow';
+        break;
+      default:
+        if (daysRemain > 0) {
+          equivelentString = 'in $daysRemain days';
+        } else {
+          equivelentString = 'Gone';
+        }
+    }
+    return equivelentString;
   }
 }
 

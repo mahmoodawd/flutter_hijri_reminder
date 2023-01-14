@@ -70,13 +70,7 @@ class _SavedEvent extends State<SavedEvents> {
                               return UserEventWidget(
                                 title: currentItem.title,
                                 date: AnimatedDateWidget(
-                                  primaryDate: currentItem.remainingDays <= 0
-                                      ? currentItem.remainingDays == 0
-                                          ? 'Today'
-                                          : 'Gone'
-                                      : 'in ' +
-                                          currentItem.remainingDays.toString() +
-                                          ' days',
+                                  primaryDate: currentItem.remainingDays,
                                   alternativeDate:
                                       currentItem.date.toFormat("dd MM"),
                                 ),

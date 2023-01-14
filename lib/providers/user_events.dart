@@ -25,7 +25,7 @@ class UserEvents with ChangeNotifier {
       'event_day': date.hDay,
       'event_month': date.hMonth,
       'event_year': date.hYear,
-      'is_notified': notificationStatus,
+      'is_notified': notificationStatus ? 1 : 0,
     });
   }
 

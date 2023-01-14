@@ -37,18 +37,13 @@ class EventsScreen extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) {
                             final remainingDays =
                                 events2Show.events[index].remainingDays;
-                            final remainingDaysString = remainingDays <= 0
-                                ? remainingDays == 0
-                                    ? 'Today'
-                                    : 'Gone'
-                                : 'in $remainingDays days';
                             bool isItemSaved =
                                 Provider.of<UserEvents>(context, listen: false)
                                     .isExist(events2Show.events[index].eventId);
                             return EventWidget(
                               itemExist: isItemSaved,
                               date: AnimatedDateWidget(
-                                primaryDate: '$remainingDaysString',
+                                primaryDate: '$remainingDays',
                                 alternativeDate: events2Show.events[index].date
                                     .toFormat("dd MMMM"),
                               ),
