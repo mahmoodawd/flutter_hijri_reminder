@@ -1,4 +1,5 @@
 import 'package:hijri/hijri_calendar.dart';
+import 'package:hijri_reminder/screens/about_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,11 @@ class _AppHomeState extends State<AppHome> {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       actions: [
+        IconButton(
+            tooltip: 'About',
+            icon: Icon(Icons.info),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(AboutScreen.routeName)),
         IconButton(
           tooltip: 'Settings',
           icon: Icon(Icons.settings),

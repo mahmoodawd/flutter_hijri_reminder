@@ -1,3 +1,4 @@
+import 'package:hijri_reminder/screens/about_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
@@ -63,6 +64,7 @@ class _MyAppState extends State<MyApp> {
             routes: {
               EventsScreen.routeName: (ctx) => EventsScreen(),
               SettingsScreen.routeName: (ctx) => SettingsScreen(),
+              AboutScreen.routeName: (ctx) => AboutScreen(),
             },
           );
         }));
