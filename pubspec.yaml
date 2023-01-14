@@ -34,6 +34,9 @@ dependencies:
   #For Splash screen
   flutter_native_splash: ^2.2.16
   shared_preferences: ^2.0.15
+  settings_ui: ^2.0.2
+  url_launcher: ^6.1.7
+  font_awesome_flutter: ^10.3.0
   
 
 dev_dependencies:
