@@ -36,7 +36,7 @@ class Styles {
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),
       iconTheme: IconThemeData(
-          color: isDarkTheme ? Colors.white : Color.fromARGB(255, 25, 133, 34)),
+          color: isDarkTheme ? Colors.white : Color.fromARGB(255, 23, 117, 31)),
       appBarTheme: AppBarTheme(
         elevation: 5.0,
       ),

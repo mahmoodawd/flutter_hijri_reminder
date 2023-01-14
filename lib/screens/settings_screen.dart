@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 import '.././providers/theme.dart';
 
@@ -17,26 +18,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     var darkThemeProvider = Provider.of<DarkThemeProvider>(context);
-    bool isDark = darkThemeProvider.darkThemeStatus;
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text('Theme Mode'),
-            trailing: IconButton(
-              onPressed: () {
-                isDark = !isDark;
-                darkThemeProvider.darkThemeStatus = isDark;
-              },
-              icon: Icon(
-                  isDark ? Icons.lightbulb_outline : Icons.lightbulb_rounded),
-              color: Theme.of(context).iconTheme.color,
-              iconSize: 30,
-            ),
+      body: SettingsList(
+        sections: [
+          SettingsSection(
+            title: Text('Preferences'),
+            tiles: <SettingsTile>[
+              SettingsTile.switchTile(
+                onToggle: (value) {
+                  darkThemeProvider.darkThemeStatus = value;
+                },
+                initialValue: darkThemeProvider.darkThemeStatus,
+                title: Text('Dark Mode'),
+              ),
+              SettingsTile.navigation(
+                leading: Icon(Icons.language),
+                title: Text('Language'),
+                value: Text('Soon'),
+              ),
+              SettingsTile.navigation(
+                leading: Icon(Icons.font_download_outlined),
+                title: Text('Font type'),
+                value: Text('Soon'),
+              ),
+            ],
           ),
         ],
       ),
