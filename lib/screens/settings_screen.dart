@@ -24,9 +24,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: Text('Settings'),
       ),
       body: SettingsList(
+        lightTheme: SettingsThemeData(
+          leadingIconsColor: Theme.of(context).iconTheme.color,
+          settingsTileTextColor: Theme.of(context).primaryColor,
+        ),
         sections: [
           SettingsSection(
-            title: Text('Preferences'),
+            title: Text(
+              'Preferences',
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
             tiles: <SettingsTile>[
               SettingsTile.switchTile(
                 onToggle: (value) {
