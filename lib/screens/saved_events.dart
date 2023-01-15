@@ -19,7 +19,7 @@ class SavedEvents extends StatefulWidget {
 }
 
 class _SavedEvent extends State<SavedEvents> {
-  final ScrollController _scrollController = ScrollController();
+  ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,6 @@ class _SavedEvent extends State<SavedEvents> {
                             itemCount: value.userEvents.length,
                             itemBuilder: (BuildContext context, int index) {
                               final currentItem = value.userEvents[index];
-
                               return UserEventWidget(
                                 title: currentItem.title,
                                 date: AnimatedDateWidget(

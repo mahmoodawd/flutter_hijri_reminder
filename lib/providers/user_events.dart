@@ -7,9 +7,7 @@ import '../models/event_item.dart';
 class UserEvents with ChangeNotifier {
   List<UserEventItem> _userEvents = [];
 
-  List<UserEventItem> get userEvents {
-    return [..._userEvents.reversed];
-  }
+  List<UserEventItem> get userEvents => [..._userEvents.reversed];
 
   Future<void> addNewEvent(String eventId, HijriCalendar date, String title,
       bool notificationStatus) async {
