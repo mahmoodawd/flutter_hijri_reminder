@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AnimatedDateWidget extends StatefulWidget {
-  final String primaryDate;
-  final String alternativeDate;
+  final String? primaryDate;
+  final String? alternativeDate;
   AnimatedDateWidget({key, this.primaryDate, this.alternativeDate})
       : super(key: key);
 
@@ -26,8 +26,8 @@ class _AnimatedDateWidgetState extends State<AnimatedDateWidget> {
         duration: const Duration(seconds: 1),
         curve: Curves.decelerate, //animation style
         child: Text(
-          !_toggleDate ? widget.primaryDate : widget.alternativeDate,
-          style: Theme.of(context).textTheme.bodyText2.copyWith(
+          !_toggleDate ? widget.primaryDate! : widget.alternativeDate!,
+          style: Theme.of(context).textTheme.bodyText2!.copyWith(
                 fontWeight: FontWeight.normal,
               ),
         ),

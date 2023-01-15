@@ -1,4 +1,3 @@
-import 'package:hijri_reminder/screens/about_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
@@ -9,9 +8,10 @@ import 'providers/user_events.dart';
 import 'providers/public_events.dart';
 
 import 'utils/styles.dart';
-import 'screens/settings_screen.dart';
-import 'screens/events_screen.dart';
 import 'screens/app_home.dart';
+import 'screens/events_screen.dart';
+import 'screens/settings_screen.dart';
+import 'screens/about_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         child: Consumer<DarkThemeProvider>(
-            builder: (BuildContext context, theme, Widget child) {
+            builder: (BuildContext context, theme, Widget? child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Hijri-Reminder',

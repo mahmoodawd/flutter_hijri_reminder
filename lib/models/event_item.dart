@@ -2,22 +2,22 @@ import 'package:flutter/foundation.dart';
 import 'package:hijri/hijri_calendar.dart';
 
 class EventItem {
-  final String eventId;
-  final HijriCalendar date;
-  final String title;
-  int daysRemain;
+  final String? eventId;
+  final HijriCalendar? date;
+  final String? title;
+  late int daysRemain;
 
   EventItem({
-    @required this.eventId,
-    @required this.date,
-    @required this.title,
+    required this.eventId,
+    required this.date,
+    required this.title,
   }) {
     _calcRemainingDays();
   }
 
   _calcRemainingDays() {
     var eventDateInGregorian = HijriCalendar()
-        .hijriToGregorian(this.date.hYear, this.date.hMonth, this.date.hDay);
+        .hijriToGregorian(this.date!.hYear, this.date!.hMonth, this.date!.hDay);
     int diffInDays = eventDateInGregorian.difference(DateTime.now()).inDays;
     if (diffInDays == 0 && DateTime.now().day < eventDateInGregorian.day) {
       diffInDays = 1;
@@ -53,13 +53,13 @@ class EventItem {
 }
 
 class UserEventItem extends EventItem {
-  bool isNotified;
+  bool? isNotified;
 
   UserEventItem({
-    String eventId,
-    HijriCalendar date,
-    String title,
-    bool isNotified,
+    String? eventId,
+    HijriCalendar? date,
+    String? title,
+    bool? isNotified,
   }) : super(eventId: eventId, date: date, title: title) {
     this.isNotified = isNotified;
   }

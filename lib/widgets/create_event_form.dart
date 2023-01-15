@@ -7,7 +7,7 @@ import '../providers/user_events.dart';
 import '../services/notifications_service.dart';
 
 class CreateEventForm extends StatefulWidget {
-  const CreateEventForm({Key key}) : super(key: key);
+  const CreateEventForm({Key? key}) : super(key: key);
 
   @override
   State<CreateEventForm> createState() => _CreateEventFormState();
@@ -18,7 +18,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
       GlobalKey<FormState>();
   TextEditingController _titleController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
-  DateTime pickedDate;
+  DateTime? pickedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                     return null;
                   },
                   onSaved: (value) {
-                    _titleController.text = value;
+                    _titleController.text = value!;
                   }),
               const SizedBox(
                 height: 15,
@@ -85,7 +85,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
                   if (pickedDate != null) {
                     _dateController.text =
-                        DateFormat.yMMMMd().format(pickedDate);
+                        DateFormat.yMMMMd().format(pickedDate!);
                   }
                 },
               ),
@@ -97,7 +97,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   filled: true,
                   enabled: false,
                   hintText: pickedDate != null
-                      ? _convert2hijri(pickedDate)
+                      ? _convert2hijri(pickedDate!)
                       : 'Hijri Date will go here',
                   border: outlineInputBorder,
                   prefixIcon: Icon(Icons.calendar_today),
@@ -116,8 +116,8 @@ class _CreateEventFormState extends State<CreateEventForm> {
         TextButton(
             child: Text('Save'),
             onPressed: () {
-              if (_eventCreationFormKey.currentState.validate()) {
-                _eventCreationFormKey.currentState.save();
+              if (_eventCreationFormKey.currentState!.validate()) {
+                _eventCreationFormKey.currentState!.save();
                 _addNewEvent();
                 Navigator.of(context).pop();
               }
@@ -127,12 +127,12 @@ class _CreateEventFormState extends State<CreateEventForm> {
   }
 
   void _addNewEvent() {
-    final hijriDate = new HijriCalendar.fromDate(pickedDate);
+    final hijriDate = new HijriCalendar.fromDate(pickedDate!);
     String title = _titleController.text;
 
     final eventId = DateTime.now().toString();
-    Provider.of<UserEvents>(context, listen: false).addNewEvent(
-        eventId, hijriDate, title == null ? 'Untitled' : title, true);
+    Provider.of<UserEvents>(context, listen: false)
+        .addNewEvent(eventId, hijriDate, title, true);
     NotificationService().scheduleNotificationForEvent(title, hijriDate);
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
   static const routeName = 'about-screen';
-  const AboutScreen({Key key}) : super(key: key);
+  const AboutScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,13 @@ class AboutScreen extends StatelessWidget {
             Text(
               'Hijri Reminder',
               style:
-                  Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 26),
+                  Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 26),
               textAlign: TextAlign.center,
             ),
             Text(
               'Reminder app in Hijri',
               style:
-                  Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 14),
+                  Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 14),
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -46,7 +46,7 @@ class AboutScreen extends StatelessWidget {
               'You Can reach us at: ',
               style: Theme.of(context)
                   .textTheme
-                  .bodyText2
+                  .bodyText2!
                   .copyWith(fontSize: 16, fontWeight: FontWeight.normal),
               textAlign: TextAlign.center,
             ),

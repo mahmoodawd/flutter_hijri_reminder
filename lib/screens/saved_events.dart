@@ -55,7 +55,7 @@ class _SavedEvent extends State<SavedEvents> {
                             : Container(),
                       ]),
                   builder: (context, value, child) => value.userEvents.isEmpty
-                      ? child
+                      ? child!
                       : Scrollbar(
                           interactive: true,
                           controller: _scrollController,
@@ -71,16 +71,16 @@ class _SavedEvent extends State<SavedEvents> {
                                 date: AnimatedDateWidget(
                                   primaryDate: currentItem.remainingDays,
                                   alternativeDate:
-                                      currentItem.date.toFormat("dd MM"),
+                                      currentItem.date!.toFormat("dd MM"),
                                 ),
                                 notificationAction: () {
                                   value.updateEvent(currentItem.eventId,
-                                      !currentItem.isNotified);
-                                  if (currentItem.isNotified) {
+                                      !currentItem.isNotified!);
+                                  if (currentItem.isNotified!) {
                                     NotificationService()
                                         .scheduleNotificationForEvent(
                                             currentItem.title,
-                                            currentItem.date);
+                                            currentItem.date!);
                                   } else {
                                     NotificationService().cancelNotification(
                                         currentItem.date.hashCode);
@@ -91,10 +91,10 @@ class _SavedEvent extends State<SavedEvents> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
                                     content: Text(
-                                      !currentItem.isNotified
+                                      !currentItem.isNotified!
                                           ? 'Notification cancelled'
                                           : 'You will be notified for ' +
-                                              currentItem.title,
+                                              currentItem.title!,
                                       textAlign: TextAlign.center,
                                     ),
                                     duration: Duration(seconds: 2),
@@ -102,9 +102,9 @@ class _SavedEvent extends State<SavedEvents> {
                                 },
                                 deletetionAction: () {
                                   final date = HijriCalendar().hijriToGregorian(
-                                      currentItem.date.hYear,
-                                      currentItem.date.hMonth,
-                                      currentItem.date.hDay);
+                                      currentItem.date!.hYear,
+                                      currentItem.date!.hMonth,
+                                      currentItem.date!.hDay);
                                   value.removeEvent(
                                       value.userEvents[index].eventId);
                                   NotificationService()
@@ -113,7 +113,7 @@ class _SavedEvent extends State<SavedEvents> {
                                   _showSnackBar(context, () {
                                     value.addNewEvent(
                                         currentItem.eventId,
-                                        currentItem.date,
+                                        currentItem.date!,
                                         currentItem.title,
                                         true);
                                   });
@@ -137,7 +137,7 @@ class _SavedEvent extends State<SavedEvents> {
       duration: Duration(seconds: 2),
       action: SnackBarAction(
         label: 'Undo',
-        onPressed: action,
+        onPressed: action as void Function(),
       ),
     ));
   }

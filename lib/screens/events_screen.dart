@@ -44,14 +44,14 @@ class EventsScreen extends StatelessWidget {
                               itemExist: isItemSaved,
                               date: AnimatedDateWidget(
                                 primaryDate: '$remainingDays',
-                                alternativeDate: events2Show.events[index].date
+                                alternativeDate: events2Show.events[index].date!
                                     .toFormat("dd MMMM"),
                               ),
                               title: events2Show.events[index].title,
                               action: () => _saveEvent(
                                 context,
                                 events2Show.events[index].eventId,
-                                events2Show.events[index].date,
+                                events2Show.events[index].date!,
                                 events2Show.events[index].title,
                               ),
                             );
@@ -60,8 +60,8 @@ class EventsScreen extends StatelessWidget {
                       )));
   }
 
-  void _saveEvent(BuildContext context, String eventId, HijriCalendar eventDate,
-      String title) {
+  void _saveEvent(BuildContext context, String? eventId, HijriCalendar eventDate,
+      String? title) {
     Provider.of<UserEvents>(context, listen: false)
         .addNewEvent(eventId, eventDate, title, true);
 

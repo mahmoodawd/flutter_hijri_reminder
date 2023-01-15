@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class EventWidget extends StatefulWidget {
   bool itemExist;
-  final String title;
+  final String? title;
   final Widget date;
   final VoidCallback action;
 
   EventWidget(
       {key,
-      @required this.itemExist,
-      @required this.date,
+      required this.itemExist,
+      required this.date,
       this.title = 'No title given',
-      @required this.action});
+      required this.action});
 
   @override
   _EventWidgetState createState() => _EventWidgetState();
@@ -29,7 +29,7 @@ class _EventWidgetState extends State<EventWidget> {
         child: ListTile(
           title: Center(
             child: Text(
-              this.widget.title,
+              this.widget.title!,
               style: Theme.of(context).textTheme.bodyText2,
             ),
           ),

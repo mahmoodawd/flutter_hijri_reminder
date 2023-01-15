@@ -32,26 +32,26 @@ class DBHelper {
     );
   }
 
-  static Future<void> insert(String table, Map<String, Object> data) async {
+  static Future<void> insert(String table, Map<String, Object?> data) async {
     final db = await DBHelper.hijridatabase();
     db
         .insert(table, data, conflictAlgorithm: ConflictAlgorithm.replace)
         .then((value) => print('Record $value Inserted Successfully'));
   }
 
-  static Future<List<Map<String, Object>>> getData(String table) async {
+  static Future<List<Map<String, Object?>>> getData(String table) async {
     final db = await DBHelper.hijridatabase();
     return db.query(table);
   }
 
-  static Future<void> delete(String table, String id) async {
+  static Future<void> delete(String table, String? id) async {
     final db = await DBHelper.hijridatabase();
     return db.delete(table, where: 'id = ?', whereArgs: [id]).then(
         (value) => print('Record $id Deleted Successfully'));
   }
 
   static Future<void> update(
-      String table, Map<String, Object> data, String id) async {
+      String table, Map<String, Object> data, String? id) async {
     final db = await DBHelper.hijridatabase();
     db
         .update(table, data,

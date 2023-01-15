@@ -9,7 +9,7 @@ class UserEvents with ChangeNotifier {
 
   List<UserEventItem> get userEvents => [..._userEvents.reversed];
 
-  Future<void> addNewEvent(String eventId, HijriCalendar date, String title,
+  Future<void> addNewEvent(String? eventId, HijriCalendar date, String? title,
       bool notificationStatus) async {
     _userEvents.add(UserEventItem(
         eventId: eventId,
@@ -27,13 +27,13 @@ class UserEvents with ChangeNotifier {
     });
   }
 
-  Future<void> removeEvent(String eventId) async {
+  Future<void> removeEvent(String? eventId) async {
     _userEvents.removeWhere((element) => element.eventId == eventId);
     notifyListeners();
     DBHelper.delete('user_events_tbl', eventId);
   }
 
-  Future<void> updateEvent(String eventId, bool notificationStatus) async {
+  Future<void> updateEvent(String? eventId, bool notificationStatus) async {
     _userEvents.forEach((element) {
       if (element.eventId == eventId) {
         element.isNotified = notificationStatus;
@@ -65,11 +65,11 @@ class UserEvents with ChangeNotifier {
     notifyListeners();
   }
 
-  bool isExist(String eventId) {
+  bool isExist(String? eventId) {
     return _userEvents.any((element) => element.eventId == eventId);
   }
 
-  bool isItemNotified(String eventId) {
+  bool? isItemNotified(String eventId) {
     var item = _userEvents.firstWhere((element) => element.eventId == eventId);
     return item.isNotified;
   }

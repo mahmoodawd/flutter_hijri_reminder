@@ -48,7 +48,7 @@ class NotificationService {
   }
 
   Future<void> scheduleNotificationForEvent(
-      String eventTitle, HijriCalendar eventHjriDate) async {
+      String? eventTitle, HijriCalendar eventHjriDate) async {
     DateTime eventGregorianDate = HijriCalendar().hijriToGregorian(
         eventHjriDate.hYear, eventHjriDate.hMonth, eventHjriDate.hDay);
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
@@ -101,7 +101,7 @@ class NotificationService {
     print('Background Notification tapped');
   }
 
-  void showNotification(String eventTitle, HijriCalendar eventHjriDate) async {
+  void showNotification(String? eventTitle, HijriCalendar eventHjriDate) async {
     await flutterLocalNotificationsPlugin.show(
       eventTitle.hashCode,
       eventHjriDate.toFormat("dd MMMM"),
