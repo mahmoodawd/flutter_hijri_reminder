@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 import '../services/notifications_service.dart';
 import '../providers/user_events.dart';
-
 import '../utils/shared_methods.dart';
-import '../widgets/user_event_widget.dart';
-import '../widgets/animated_date_widget.dart';
+
+import '../widgets/user_events_screen/user_event_widget.dart';
+import '../widgets/shared/animated_date_widget.dart';
 import '../widgets/user_events_screen/no_events_widget.dart';
 
 class SavedEvents extends StatefulWidget {

@@ -7,8 +7,8 @@ import '../providers/public_events.dart';
 import '../providers/user_events.dart';
 
 import '../utils/shared_methods.dart';
-import '../widgets/event_widget.dart';
-import '../widgets/animated_date_widget.dart';
+import '../widgets/events_screen/event_widget.dart';
+import '../widgets/shared/animated_date_widget.dart';
 import '../widgets/shared/custom_app_bar.dart';
 
 class EventsScreen extends StatelessWidget {

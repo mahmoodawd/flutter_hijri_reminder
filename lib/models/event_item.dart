@@ -1,5 +1,6 @@
 import 'package:hijri/hijri_calendar.dart';
-import 'package:hijri_reminder/utils/shared_methods.dart';
+
+import '../utils/shared_methods.dart';
 
 class EventItem {
   final String eventId;

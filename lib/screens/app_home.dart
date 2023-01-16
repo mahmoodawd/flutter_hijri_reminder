@@ -9,7 +9,7 @@ import '../screens/saved_events.dart';
 import '../screens/settings_screen.dart';
 import '../widgets/app_home/header_navigator.dart';
 import '../widgets/shared/custom_app_bar.dart';
-import '../widgets/animated_date_widget.dart';
+import '../widgets/shared/animated_date_widget.dart';
 import '../widgets/app_home/create_event_button.dart';
 
 class AppHome extends StatefulWidget {

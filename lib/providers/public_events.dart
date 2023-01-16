@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hijri/hijri_calendar.dart';
 
 import '../helpers/db_helper.dart';
