@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '.././helpers/db_helper.dart';
 import 'package:hijri/hijri_calendar.dart';
 
+import '../helpers/db_helper.dart';
 import '../models/event_item.dart';
 
 class PublicEvents with ChangeNotifier {

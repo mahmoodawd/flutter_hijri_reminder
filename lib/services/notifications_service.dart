@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors, depend_on_referenced_packages, avoid_print
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
+import '../utils/shared_methods.dart';
 
 const String events_channel_id = '2023';
 
@@ -35,8 +35,8 @@ class NotificationService {
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: notificationTapForeground,
-      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
+      onDidReceiveNotificationResponse: _notificationTapForeground,
+      onDidReceiveBackgroundNotificationResponse: _notificationTapBackground,
     );
   }
 
@@ -49,80 +49,83 @@ class NotificationService {
 
   Future<void> scheduleNotificationForEvent(
       String? eventTitle, HijriCalendar eventHjriDate) async {
-    DateTime eventGregorianDate = HijriCalendar().hijriToGregorian(
-        eventHjriDate.hYear, eventHjriDate.hMonth, eventHjriDate.hDay);
+    DateTime eventGregorianDate = convert2Greogrian(eventHjriDate);
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
 
     if (eventHjriDate.hYear < HijriCalendar.now().hYear) {
-      eventGregorianDate = HijriCalendar().hijriToGregorian(
-          HijriCalendar.now().hYear, eventHjriDate.hMonth, eventHjriDate.hDay);
+      eventHjriDate.hYear = HijriCalendar.now().hYear;
+      eventGregorianDate = convert2Greogrian(eventHjriDate);
     }
 
     Duration difference = eventGregorianDate.difference(now);
-    if (difference.inDays.isNegative) {
-      eventGregorianDate = addOneMoreHijriYear(eventHjriDate);
-    }
     if (difference.inDays == 0 && now.day == eventGregorianDate.day) {
-      showNotification(eventTitle, eventHjriDate);
+      _showNotification(eventTitle, eventHjriDate);
       return;
     }
 
+    if (difference.inDays.isNegative) {
+      eventGregorianDate = _addOneMoreHijriYear(eventHjriDate);
+    }
+    _scheduleNotification(eventHjriDate, eventTitle, eventGregorianDate);
+    print('Notification schduled to $eventGregorianDate');
+  }
+
+  void _showNotification(
+      String? eventTitle, HijriCalendar eventHjriDate) async {
+    const androidNotificationDetails = AndroidNotificationDetails(
+      events_channel_id,
+      'Saved Events',
+      channelDescription: 'Events saved by user',
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    await flutterLocalNotificationsPlugin.show(
+      eventHjriDate.hashCode,
+      eventHjriDate.toFormat("dd MMMM"),
+      'Today is $eventTitle',
+      const NotificationDetails(android: androidNotificationDetails),
+      payload: 'item$id',
+    );
+  }
+
+  Future<void> _scheduleNotification(
+    HijriCalendar eventHjriDate,
+    String? eventTitle,
+    DateTime eventGregorianDate,
+  ) async {
+    const androidNotificationDetails = AndroidNotificationDetails(
+        events_channel_id, 'Saved Events',
+        channelDescription: 'Events saved by user',
+        priority: Priority.high,
+        ticker: 'ticker');
     await flutterLocalNotificationsPlugin.zonedSchedule(
         eventHjriDate.hashCode,
         eventHjriDate.toFormat("dd MMMM"),
         'Today is $eventTitle',
         tz.TZDateTime.from(eventGregorianDate, tz.local),
-        const NotificationDetails(
-            android: const AndroidNotificationDetails(
-          events_channel_id,
-          'Saved Events',
-          channelDescription: 'Events saved by user',
-          importance: Importance.max,
-          priority: Priority.high,
-          ticker: 'ticker',
-        )),
+        const NotificationDetails(android: androidNotificationDetails),
         payload: 'item$id',
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
-    print('Notification schduled to $eventGregorianDate');
   }
 
   Future<void> cancelNotification(int id) async {
     await flutterLocalNotificationsPlugin.cancel(id);
   }
 
-  Future notificationTapForeground(NotificationResponse payload) async {
+  Future _notificationTapForeground(NotificationResponse payload) async {
     print('Foreground Notification tapped');
   }
 
-  static void notificationTapBackground(
+  static void _notificationTapBackground(
       NotificationResponse notificationResponse) {
     print('Background Notification tapped');
   }
 
-  void showNotification(String? eventTitle, HijriCalendar eventHjriDate) async {
-    await flutterLocalNotificationsPlugin.show(
-      eventTitle.hashCode,
-      eventHjriDate.toFormat("dd MMMM"),
-      'Today is $eventTitle',
-      const NotificationDetails(
-          android: const AndroidNotificationDetails(
-        events_channel_id,
-        'Saved Events',
-        channelDescription: 'Events saved by user',
-        importance: Importance.max,
-        priority: Priority.high,
-        ticker: 'ticker',
-      )),
-      payload: 'item$id',
-    );
-  }
-
-  addOneMoreHijriYear(HijriCalendar eventHijriDate) {
+  _addOneMoreHijriYear(HijriCalendar eventHijriDate) {
     eventHijriDate.hYear += 1;
-    final correctedDate = HijriCalendar().hijriToGregorian(
-        eventHijriDate.hYear, eventHijriDate.hMonth, eventHijriDate.hDay);
+    final correctedDate = convert2Greogrian(eventHijriDate);
     return correctedDate;
   }
 }

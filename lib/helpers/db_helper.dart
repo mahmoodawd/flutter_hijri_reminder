@@ -1,29 +1,28 @@
-import '../utils/static_data.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../utils/static_data.dart';
 
 class DBHelper {
   static Future<Database> hijridatabase() async {
     final dbPath = await getDatabasesPath();
-    String fullPath = join(dbPath, 'hijri.db');
+    String fullDBPath = join(dbPath, 'hijri.db');
     return openDatabase(
-      fullPath,
+      fullDBPath,
       version: 1,
       onCreate: (db, version) async {
-        var userEventsTable = 'user_events_tbl';
-        var publicEventsTable = 'public_events_tbl';
         await db
             .execute(
-                'CREATE Table $userEventsTable (id TEXT PRIMARY KEY , title nvarchr(20), event_day INTEGER not null, event_month INTEGER not null, event_year INTEGER not null, is_notified INTEGER not null)')
-            .then((value) => print('table $userEventsTable created'));
+                'CREATE Table user_events_tbl (id TEXT PRIMARY KEY , title nvarchr(20), event_day INTEGER not null, event_month INTEGER not null, event_year INTEGER not null, is_notified INTEGER not null)')
+            .then((value) => print('user_events_table created'));
         await db
             .execute(
-                'CREATE Table $publicEventsTable (id TEXT PRIMARY KEY , title nvarchr(20), event_day INTEGER not null, event_month INTEGER not null, event_year INTEGER not null)')
-            .then((value) => print('table $publicEventsTable created'));
+                'CREATE Table public_events_tbl (id TEXT PRIMARY KEY , title nvarchr(20), event_day INTEGER not null, event_month INTEGER not null, event_year INTEGER not null)')
+            .then((value) => print('public_events_table created'));
 
         publicEventsEn.forEach((element) {
           db
-              .insert(publicEventsTable, element,
+              .insert('public_events_tbl', element,
                   conflictAlgorithm: ConflictAlgorithm.replace)
               .then(
                   (value) => print('Public Events Data inserted succesfully'));

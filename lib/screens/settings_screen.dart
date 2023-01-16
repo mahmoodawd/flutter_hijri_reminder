@@ -1,9 +1,10 @@
 import 'package:provider/provider.dart';
-
-import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '.././providers/theme.dart';
+import 'package:flutter/material.dart';
+
+import '../providers/theme.dart';
+import '../widgets/shared/custom_app_bar.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = 'settings';
@@ -20,9 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     var darkThemeProvider = Provider.of<DarkThemeProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-      ),
+      appBar: CustomAppBar(title: 'Settings'),
       body: SettingsList(
         lightTheme: SettingsThemeData(
           leadingIconsColor: Theme.of(context).iconTheme.color,

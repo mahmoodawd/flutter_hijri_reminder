@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:hijri/hijri_calendar.dart';
+import 'package:hijri_reminder/utils/shared_methods.dart';
 
 class EventItem {
-  final String? eventId;
-  final HijriCalendar? date;
-  final String? title;
+  final String eventId;
+  final HijriCalendar date;
+  final String title;
   late int daysRemain;
 
   EventItem({
@@ -13,20 +13,6 @@ class EventItem {
     required this.title,
   }) {
     _calcRemainingDays();
-  }
-
-  _calcRemainingDays() {
-    var eventDateInGregorian = HijriCalendar()
-        .hijriToGregorian(this.date!.hYear, this.date!.hMonth, this.date!.hDay);
-    int diffInDays = eventDateInGregorian.difference(DateTime.now()).inDays;
-    if (diffInDays == 0 && DateTime.now().day < eventDateInGregorian.day) {
-      diffInDays = 1;
-    } else if (diffInDays == 0 &&
-        DateTime.now().day > eventDateInGregorian.day) {
-      diffInDays = -1;
-    }
-    print(" difference for $title : $diffInDays");
-    daysRemain = diffInDays;
   }
 
   String get remainingDays {
@@ -50,17 +36,18 @@ class EventItem {
     }
     return equivelentString;
   }
-}
 
-class UserEventItem extends EventItem {
-  bool? isNotified;
+  _calcRemainingDays() {
+    var eventDateInGregorian = convert2Greogrian(date);
+    int diffInDays = eventDateInGregorian.difference(DateTime.now()).inDays;
 
-  UserEventItem({
-    String? eventId,
-    HijriCalendar? date,
-    String? title,
-    bool? isNotified,
-  }) : super(eventId: eventId, date: date, title: title) {
-    this.isNotified = isNotified;
+    if (diffInDays == 0 && DateTime.now().day < eventDateInGregorian.day) {
+      diffInDays = 1;
+    } else if (diffInDays == 0 &&
+        DateTime.now().day > eventDateInGregorian.day) {
+      diffInDays = -1;
+    }
+    print(" difference for $title : $diffInDays");
+    daysRemain = diffInDays;
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hijri/hijri_calendar.dart';
 
 import '../helpers/db_helper.dart';
-import '../models/event_item.dart';
+import '../models/user_event_item.dart';
 
 class UserEvents with ChangeNotifier {
   List<UserEventItem> _userEvents = [];
@@ -67,10 +67,5 @@ class UserEvents with ChangeNotifier {
 
   bool isExist(String? eventId) {
     return _userEvents.any((element) => element.eventId == eventId);
-  }
-
-  bool? isItemNotified(String eventId) {
-    var item = _userEvents.firstWhere((element) => element.eventId == eventId);
-    return item.isNotified;
   }
 }

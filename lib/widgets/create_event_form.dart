@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/user_events.dart';
-import '../services/notifications_service.dart';
+import 'package:flutter/material.dart';
+
+import '../models/user_event_item.dart';
+import '../utils/shared_methods.dart';
 
 class CreateEventForm extends StatefulWidget {
   const CreateEventForm({Key? key}) : super(key: key);
@@ -97,7 +96,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   filled: true,
                   enabled: false,
                   hintText: pickedDate != null
-                      ? _convert2hijri(pickedDate!)
+                      ? convert2hijri(pickedDate!).toFormat('MM dd,yyyy')
                       : 'Hijri Date will go here',
                   border: outlineInputBorder,
                   prefixIcon: Icon(Icons.calendar_today),
@@ -114,38 +113,29 @@ class _CreateEventFormState extends State<CreateEventForm> {
               Navigator.of(context).pop();
             }),
         TextButton(
-            child: Text('Save'),
-            onPressed: () {
-              if (_eventCreationFormKey.currentState!.validate()) {
-                _eventCreationFormKey.currentState!.save();
-                _addNewEvent();
-                Navigator.of(context).pop();
-              }
-            }),
+          child: Text('Save'),
+          onPressed: () => _addNewEvent(),
+        ),
       ],
     );
   }
 
   void _addNewEvent() {
-    final hijriDate = new HijriCalendar.fromDate(pickedDate!);
-    String title = _titleController.text;
-
-    final eventId = DateTime.now().toString();
-    Provider.of<UserEvents>(context, listen: false)
-        .addNewEvent(eventId, hijriDate, title, true);
-    NotificationService().scheduleNotificationForEvent(title, hijriDate);
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(
-        'Added to saved dates',
-        textAlign: TextAlign.center,
-      ),
-      duration: Duration(seconds: 2),
-    ));
-  }
-
-  String _convert2hijri(DateTime gregorianDate) {
-    final hijriiDate = new HijriCalendar.fromDate(gregorianDate);
-    return hijriiDate.toFormat('MM dd,yyyy');
+    {
+      if (_eventCreationFormKey.currentState!.validate()) {
+        _eventCreationFormKey.currentState!.save();
+        final hijriDate = convert2hijri(pickedDate!);
+        String title = _titleController.text;
+        final eventId = hijriDate.hashCode.toString();
+        UserEventItem item = UserEventItem(
+            eventId: eventId, date: hijriDate, title: title, isNotified: true);
+        addNewEvent(context, item);
+        Navigator.of(context).pop();
+        showCustomSnakBar(
+          context: context,
+          message: 'Added to saved dates',
+        );
+      }
+    }
   }
 }

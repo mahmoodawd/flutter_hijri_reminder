@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:flutter/material.dart';
+
+import '../widgets/shared/custom_app_bar.dart';
 
 class AboutScreen extends StatelessWidget {
   static const routeName = 'about-screen';
@@ -8,13 +11,9 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTextTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'About',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
+      appBar: CustomAppBar(title: 'About'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -29,14 +28,12 @@ class AboutScreen extends StatelessWidget {
             ),
             Text(
               'Hijri Reminder',
-              style:
-                  Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 26),
+              style: appTextTheme.bodyText2!.copyWith(fontSize: 26),
               textAlign: TextAlign.center,
             ),
             Text(
               'Reminder app in Hijri',
-              style:
-                  Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 14),
+              style: appTextTheme.bodyText2!.copyWith(fontSize: 14),
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -44,9 +41,7 @@ class AboutScreen extends StatelessWidget {
             ),
             Text(
               'You Can reach us at: ',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2!
+              style: appTextTheme.bodyText2!
                   .copyWith(fontSize: 16, fontWeight: FontWeight.normal),
               textAlign: TextAlign.center,
             ),
@@ -58,7 +53,7 @@ class AboutScreen extends StatelessWidget {
               children: [
                 FloatingActionButton(
                     heroTag: 'gmailBtn',
-                    onPressed: () => _launchURLBrowser(
+                    onPressed: () => _launchExternalUrl(
                         'mailto:mahmooodawd@gmail.com?subject=Coming from Hijri reminder app'),
                     child: Icon(FontAwesomeIcons.google)),
                 SizedBox(
@@ -66,15 +61,15 @@ class AboutScreen extends StatelessWidget {
                 ),
                 FloatingActionButton(
                     heroTag: 'inBtn',
-                    onPressed: () =>
-                        _launchURLBrowser('https://linkedin.com/in/mahmoodawd'),
+                    onPressed: () => _launchExternalUrl(
+                        'https://linkedin.com/in/mahmoodawd'),
                     child: Icon(FontAwesomeIcons.linkedinIn)),
                 SizedBox(
                   width: 10,
                 ),
                 FloatingActionButton(
                     heroTag: 'phoneBtn',
-                    onPressed: () => _launchURLBrowser('tel:+20 114 168 0631'),
+                    onPressed: () => _launchExternalUrl('tel:+20 114 168 0631'),
                     child: Icon(FontAwesomeIcons.phone)),
               ],
             ),
@@ -84,7 +79,7 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  _launchURLBrowser(String link) async {
+  _launchExternalUrl(String link) async {
     var url = Uri.parse(link);
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalNonBrowserApplication);
