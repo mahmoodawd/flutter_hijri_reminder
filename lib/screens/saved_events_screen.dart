@@ -2,6 +2,7 @@ import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
 
+import '../services/language_preference.dart';
 import '../services/notifications_service.dart';
 import '../providers/user_events.dart';
 import '../utils/shared_methods.dart';
@@ -10,16 +11,16 @@ import '../widgets/user_events_screen/user_event_widget.dart';
 import '../widgets/shared/animated_date_widget.dart';
 import '../widgets/user_events_screen/no_events_widget.dart';
 
-class SavedEvents extends StatefulWidget {
+class SavedEventsScreen extends StatefulWidget {
   static const routeName = 'saved-events-screen';
 
-  SavedEvents({key}) : super(key: key);
+  SavedEventsScreen({key}) : super(key: key);
 
   @override
-  _SavedEvent createState() => _SavedEvent();
+  _SavedEventsScreen createState() => _SavedEventsScreen();
 }
 
-class _SavedEvent extends State<SavedEvents> {
+class _SavedEventsScreen extends State<SavedEventsScreen> {
   ScrollController _scrollController = ScrollController();
 
   @override
@@ -51,9 +52,10 @@ class _SavedEvent extends State<SavedEvents> {
                               return UserEventWidget(
                                 title: currentItem.title,
                                 date: AnimatedDateWidget(
-                                  primaryDate: currentItem.remainingDays,
+                                  primaryDate: translate(context)!
+                                      .remainingDays(currentItem.remainingDays),
                                   alternativeDate:
-                                      currentItem.date.toFormat("dd MM"),
+                                      currentItem.date.toFormat("dd MMMM"),
                                 ),
                                 notifyStatus: currentItem.isNotified,
                                 notificationAction: () =>
@@ -79,8 +81,8 @@ class _SavedEvent extends State<SavedEvents> {
     showCustomSnakBar(
       context: context,
       message: !eventItem.isNotified!
-          ? 'Notification cancelled'
-          : 'You will be notified for ' + eventItem.title,
+          ? translate(context)!.notificationOff
+          : translate(context)!.notificationOn + eventItem.title,
     );
   }
 
@@ -90,9 +92,9 @@ class _SavedEvent extends State<SavedEvents> {
     NotificationService().cancelNotification(eventItem.date.hashCode);
     showCustomSnakBar(
       context: context,
-      message: 'Event Deleted!',
+      message: translate(context)!.deleted,
       action: SnackBarAction(
-        label: 'Undo',
+        label: translate(context)!.undo,
         onPressed: () => addNewEvent(context, eventItem),
       ),
     );

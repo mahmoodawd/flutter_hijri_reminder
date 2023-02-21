@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 import '../models/user_event_item.dart';
+import '../services/language_preference.dart';
 import '../utils/shared_methods.dart';
 
 class CreateEventForm extends StatefulWidget {
@@ -28,7 +29,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
     );
     return AlertDialog(
       title: Text(
-        'Create New Event',
+        translate(context)!.createEvent,
         style: Theme.of(context).textTheme.bodyText2,
       ),
       content: Form(
@@ -43,13 +44,13 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   maxLines: 1,
                   textCapitalization: TextCapitalization.sentences,
                   decoration: InputDecoration(
-                    hintText: 'Title',
+                    hintText: translate(context)!.title,
                     border: outlineInputBorder,
                     prefixIcon: Icon(Icons.edit),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a title';
+                      return translate(context)!.titleHint;
                     }
                     return null;
                   },
@@ -61,7 +62,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'Pick Date',
+                  hintText: translate(context)!.pickDate,
                   border: outlineInputBorder,
                   prefixIcon: Icon(Icons.calendar_month),
                 ),
@@ -96,8 +97,8 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   filled: true,
                   enabled: false,
                   hintText: pickedDate != null
-                      ? convert2hijri(pickedDate!).toFormat('MM dd,yyyy')
-                      : 'Hijri Date will go here',
+                      ? convert2hijri(pickedDate!).toFormat('dd MMMM, yyyy')
+                      : translate(context)!.hijriDateHint,
                   border: outlineInputBorder,
                   prefixIcon: Icon(Icons.calendar_today),
                 ),
@@ -108,12 +109,12 @@ class _CreateEventFormState extends State<CreateEventForm> {
       ),
       actions: [
         TextButton(
-            child: Text('Cancel'),
+            child: Text(translate(context)!.cancel),
             onPressed: () {
               Navigator.of(context).pop();
             }),
         TextButton(
-          child: Text('Save'),
+          child: Text(translate(context)!.save),
           onPressed: () => _addNewEvent(),
         ),
       ],
@@ -133,7 +134,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
         Navigator.of(context).pop();
         showCustomSnakBar(
           context: context,
-          message: 'Added to saved dates',
+          message: translate(context)!.saved,
         );
       }
     }

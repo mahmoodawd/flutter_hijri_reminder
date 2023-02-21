@@ -82,6 +82,7 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.show(
       eventHjriDate.hashCode,
       eventHjriDate.toFormat("dd MMMM"),
+      // translate(_).notificationBody,
       'Today is $eventTitle',
       const NotificationDetails(android: androidNotificationDetails),
       payload: 'item$id',

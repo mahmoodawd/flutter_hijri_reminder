@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/language_preference.dart';
 import '../create_event_form.dart';
 
 class CreateEventButton extends StatelessWidget {
@@ -11,12 +12,12 @@ class CreateEventButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
         label: Text(
-          'Create Event',
-          style: TextStyle(color: Colors.white),
+          translate(context)!.createEvent,
+          // style: TextStyle(color: Colors.white),
         ),
         icon: Icon(
           Icons.date_range,
-          color: Colors.white,
+          // color: Colors.white,
           size: 40,
         ),
         onPressed: () => showDialog(

@@ -1,22 +1,22 @@
-import 'package:provider/provider.dart';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'services/notifications_service.dart';
+import 'providers/languages.dart';
 import 'providers/theme.dart';
 import 'providers/user_events.dart';
 import 'providers/public_events.dart';
 
 import 'utils/styles.dart';
 import 'screens/app_home.dart';
-import 'screens/events_screen.dart';
+import 'screens/public_events_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/about_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
-
   runApp(MyApp());
 }
 
@@ -27,16 +27,23 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
+  LanguagesProvider languagesProvider = new LanguagesProvider();
 
   @override
   void initState() {
     super.initState();
     getCurrentAppTheme();
+    getCurrentAppLanguage();
   }
 
   void getCurrentAppTheme() async {
     themeChangeProvider.darkThemeStatus =
         await themeChangeProvider.darkThemePreference.getDarkThemeStatus();
+  }
+
+  void getCurrentAppLanguage() async {
+    languagesProvider.locale =
+        await languagesProvider.languagePreferences.getLocale();
   }
 
   @override
@@ -52,16 +59,22 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider.value(
             value: themeChangeProvider,
           ),
+          ChangeNotifierProvider.value(
+            value: languagesProvider,
+          ),
         ],
         child: Consumer<DarkThemeProvider>(
             builder: (BuildContext context, theme, Widget? child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Hijri-Reminder',
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: Provider.of<LanguagesProvider>(context).locale,
             theme: Styles.themeData(theme.darkThemeStatus, context),
             home: AppHome(),
             routes: {
-              EventsScreen.routeName: (ctx) => EventsScreen(),
+              PublicEventsScreen.routeName: (ctx) => PublicEventsScreen(),
               SettingsScreen.routeName: (ctx) => SettingsScreen(),
               AboutScreen.routeName: (ctx) => AboutScreen(),
             },

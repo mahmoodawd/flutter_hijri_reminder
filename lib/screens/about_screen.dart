@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
 
+import '../services/language_preference.dart';
 import '../widgets/shared/custom_app_bar.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTextTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: CustomAppBar(title: 'About'),
+      appBar: CustomAppBar(title: translate(context)!.about),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +33,7 @@ class AboutScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              'Reminder app in Hijri',
+              translate(context)!.appDescription,
               style: appTextTheme.bodyText2!.copyWith(fontSize: 14),
               textAlign: TextAlign.center,
             ),
@@ -40,7 +41,7 @@ class AboutScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'You Can reach us at: ',
+              translate(context)!.contact,
               style: appTextTheme.bodyText2!
                   .copyWith(fontSize: 16, fontWeight: FontWeight.normal),
               textAlign: TextAlign.center,

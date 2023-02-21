@@ -3,9 +3,11 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 
+import '../services/language_preference.dart';
+
 import '../screens/about_screen.dart';
-import '../screens/events_screen.dart';
-import '../screens/saved_events.dart';
+import '../screens/public_events_screen.dart';
+import '../screens/saved_events_screen.dart';
 import '../screens/settings_screen.dart';
 import '../widgets/app_home/header_navigator.dart';
 import '../widgets/shared/custom_app_bar.dart';
@@ -22,20 +24,20 @@ class _AppHomeState extends State<AppHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Hijri Reminder',
+        title: translate(context)!.home,
         actions: [
           HeaderNavigator(
-              tooltip: 'About',
+              tooltip: translate(context)!.about,
               icon: Icons.info,
               destination: AboutScreen.routeName),
           HeaderNavigator(
-              tooltip: 'Settings',
+              tooltip: translate(context)!.settings,
               icon: Icons.settings,
               destination: SettingsScreen.routeName),
           HeaderNavigator(
-              tooltip: 'Public islamic events',
+              tooltip: translate(context)!.publicEvents,
               icon: Icons.date_range_outlined,
-              destination: EventsScreen.routeName),
+              destination: PublicEventsScreen.routeName),
         ],
       ),
       body: SingleChildScrollView(
@@ -47,7 +49,7 @@ class _AppHomeState extends State<AppHome> {
               primaryDate: HijriCalendar.now().toFormat('dd MMMM, yyyy'),
               alternativeDate: DateFormat.yMMMMd().format(DateTime.now()),
             ),
-            SavedEvents(),
+            SavedEventsScreen(),
           ],
         ),
       ),

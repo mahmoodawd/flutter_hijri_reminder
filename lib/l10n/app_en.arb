@@ -1,0 +1,50 @@
+{
+"home" : "Home",
+"remainingDays" : "{remainingDays, select, gone{Gone}, yesterday{Yesterday}, today{Today}, tommorow{Tommorow}, other{In {remainingDays} days}}",
+"@remainingDays": {
+  "description": "Days remaining message",
+  "placeholders": {
+    "remainingDays": {
+      "type": "String"
+    }
+  }
+},
+"publicIslamicEvents" : "{publicIslamicEvents, select, Year_start{Year start}, Prophit_birth{Prophit birth}, Esraa_Me3raj{Esraa & Me3raj}, 1st_Of_Ramadan{1st Of Ramadan}, Qadr{Qadr}, Fitr_eid{Fitr eid}, 3arafa{3arafa}, Adha_eid{Adha eid}, other{other}}",
+"@publicIslamicEvents": {
+  "description": "publicIslamicEvents message",
+  "placeholders": {
+    "publicIslamicEvents": {
+      "type": "String"
+    }
+  }
+},
+"notificationBody" : "Today is : ",
+"forYear" : "for",
+"preferences" : "Preferences",
+"appDescription" : "Reminder app in Hijri",
+"contact" : "You can reach us at:",
+
+"createEvent" : "Create Event",
+"settings" : "Settings",
+"about": "About",
+"publicEvents" : "Public Events",
+"save" : "Save",
+"cancel" : "Cancel",
+"language" : "Language",
+"darkMode" : "Dark Mode",
+"font" : "Font Type",
+"undo" : "Undo",
+
+"saved" : "Event Saved",
+"deleted" : "Event Deleted",
+"notificationOn" : "You will notified for ",
+"notificationOff" : "Notification cancelled",
+
+"title" : "title",
+"titleHint" : "please enter a title",
+"pickDate" : "pick Date",
+"hijriDateHint" : "Hijri Date will go here",
+"noEvents" : "No Events Yet!",
+"navBack" : "Navigate back to see it"
+
+} 

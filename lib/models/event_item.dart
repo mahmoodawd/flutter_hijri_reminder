@@ -23,16 +23,16 @@ class EventItem {
         equivelentString = 'today';
         break;
       case (-1):
-        equivelentString = 'Yesterday';
+        equivelentString = 'yesterday';
         break;
       case (1):
         equivelentString = 'tommorow';
         break;
       default:
         if (daysRemain > 0) {
-          equivelentString = 'in $daysRemain days';
+          equivelentString = '$daysRemain';
         } else {
-          equivelentString = 'Gone';
+          equivelentString = 'gone';
         }
     }
     return equivelentString;

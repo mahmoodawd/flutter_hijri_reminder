@@ -1,0 +1,53 @@
+{
+    "home" : "الرئيسية",
+    "remainingDays" : "{remainingDays, select, gone{انتهى}, yesterday{بالأمس}, today{اليوم}, tommorow{غدا}, other{بعد {remainingDays} يوم}}",
+    "@remainingDays": {
+      "description": "Days remaining message",
+      "placeholders": {
+        "remainingDays": {
+          "type": "String"
+        }
+      }
+    },
+    "publicIslamicEvents" : "{publicIslamicEvents, select, Year_start{رأس السنة}, Prophit_birth{المولد النبوي}, Esraa_Me3raj{الإسراء والمعراج}, 1st_Of_Ramadan{غرة رمضان}, Qadr{ليلة القدر}, Fitr_eid{عيد الفطر}, 3arafa{وقفة عرفة}, Adha_eid{عيد الأضحى}, other{أخرى}}",
+"@publicIslamicEvents": {
+  "description": "publicIslamicEvents message",
+  "placeholders": {
+    "publicIslamicEvents": {
+      "type": "String"
+    }
+  }
+},
+
+    "notificationBody" : "اليوم هو : ",
+    "forYear" : "لعام",
+    "preferences" : "التفضيلات",
+    "appDescription" : "تطبيق تذكير بالهجري",
+    "contact" : "يمكنك التواصل معنا عبر:",
+
+    "createEvent" : "إنشاء جديد",
+    "settings" : "الإعدادات",
+    "about": "عنا",
+    "publicEvents" : "المناسبات الهجرية",
+    "save" : "حفظ",
+    "cancel" : "إلغاء",
+    "language" : "اللغة",
+    "darkMode" : "الوضع الليلي",
+    "font" : "نوع الخط",
+    "undo" : "تراجع",
+
+    "saved" : "تم الحفظ",
+    "deleted" : "تم الحذف",
+    "notificationOn" : "سوف تتلقى إشعار عن ",
+    "notificationOff" : "لن تتلقى إشعار",
+
+    "title" : "عنوان الحدث",
+    "titleHint" : "أدخل عنوانا للحدث",
+    "pickDate" : "اختر التاريخ",
+    "hijriDateHint" : "سيتم عرض التاريخ الهجري هنا",
+    "noEvents" : "لا توجد أحداث محفوظة!",
+    "navBack" : "يمكنك العودة للخلف لرؤية ما حفظت"
+
+  } 
+  
+  

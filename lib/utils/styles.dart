@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      fontFamily: 'Rakkas',
+      fontFamily: 'Tajawal',
       disabledColor: Colors.grey,
       appBarTheme: AppBarTheme(elevation: 5.0),
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
@@ -13,10 +13,10 @@ class Styles {
         headline1: TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: isDarkTheme ? Colors.white : Colors.green,
+          color: isDarkTheme ? Colors.white : Colors.green.shade500,
         ),
         bodyText2: TextStyle(
-          color: isDarkTheme ? Colors.white : Colors.green,
+          color: isDarkTheme ? Colors.white : Colors.green.shade500,
           fontSize: 16.0,
           fontWeight: FontWeight.w500,
         ),
@@ -32,6 +32,9 @@ class Styles {
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
             colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light(),
           ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: isDarkTheme ? Colors.grey : Colors.green,
+      ),
       iconTheme: IconThemeData(
           color: isDarkTheme ? Colors.white : Color.fromARGB(255, 23, 117, 31)),
     );

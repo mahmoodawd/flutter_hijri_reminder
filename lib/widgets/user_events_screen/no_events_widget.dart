@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../services/language_preference.dart';
+
 class NoEventsWidget extends StatelessWidget {
   const NoEventsWidget({
     Key? key,
@@ -15,7 +17,8 @@ class NoEventsWidget extends StatelessWidget {
         children: [
           Center(
             child: Text(
-              'No saved Events yet!',
+              translate(context)!.noEvents,
+              softWrap: true,
               style: Theme.of(context).textTheme.headline1,
             ),
           ),

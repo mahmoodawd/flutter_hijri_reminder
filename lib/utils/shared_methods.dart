@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import '../providers/user_events.dart';
+import '../services/language_preference.dart';
 import '../services/notifications_service.dart';
 
 void showCustomSnakBar({
@@ -23,7 +24,10 @@ void showCustomSnakBar({
 
 void addNewEvent(BuildContext context, dynamic userEventItem) {
   Provider.of<UserEvents>(context, listen: false).addNewEvent(
-      userEventItem.eventId, userEventItem.date, userEventItem.title, true);
+      userEventItem.eventId,
+      userEventItem.date,
+      translate(context)!.publicIslamicEvents(userEventItem.title),
+      true);
 
   NotificationService()
       .scheduleNotificationForEvent(userEventItem.title, userEventItem.date);

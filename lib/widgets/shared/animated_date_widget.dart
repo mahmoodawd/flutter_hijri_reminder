@@ -19,7 +19,6 @@ class _AnimatedDateWidgetState extends State<AnimatedDateWidget> {
       onTap: () {
         setState(() {
           _toggleDate = !_toggleDate;
-          print('Date Toggled $_toggleDate');
         });
       },
       child: AnimatedContainer(
