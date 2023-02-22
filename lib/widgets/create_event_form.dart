@@ -39,6 +39,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
+                  style: Theme.of(context).textTheme.bodyText1,
                   textInputAction: TextInputAction.done,
                   controller: _titleController,
                   maxLines: 1,
@@ -61,6 +62,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                 height: 15,
               ),
               TextFormField(
+                style: Theme.of(context).textTheme.bodyText1,
                 decoration: InputDecoration(
                   hintText: translate(context)!.pickDate,
                   border: outlineInputBorder,
@@ -70,7 +72,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                 readOnly: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Pick Date';
+                    return translate(context)!.pickDate;
                   }
                   return null;
                 },
@@ -93,6 +95,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                 height: 15,
               ),
               TextFormField(
+                style: Theme.of(context).textTheme.bodyText1,
                 decoration: InputDecoration(
                   filled: true,
                   enabled: false,

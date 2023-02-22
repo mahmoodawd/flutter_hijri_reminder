@@ -76,7 +76,7 @@ class NotificationService {
       events_channel_id,
       'Saved Events',
       channelDescription: 'Events saved by user',
-      priority: Priority.high,
+      priority: Priority.max,
       ticker: 'ticker',
     );
     await flutterLocalNotificationsPlugin.show(
@@ -97,7 +97,7 @@ class NotificationService {
     const androidNotificationDetails = AndroidNotificationDetails(
         events_channel_id, 'Saved Events',
         channelDescription: 'Events saved by user',
-        priority: Priority.high,
+        priority: Priority.max,
         ticker: 'ticker');
     await flutterLocalNotificationsPlugin.zonedSchedule(
         eventHjriDate.hashCode,

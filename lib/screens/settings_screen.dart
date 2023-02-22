@@ -46,11 +46,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   darkThemeProvider.darkThemeStatus = value;
                 },
                 initialValue: darkThemeProvider.darkThemeStatus,
-                title: Text(translate(context)!.darkMode),
+                title: Text(
+                  translate(context)!.darkMode,
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ),
               SettingsTile.navigation(
                   leading: Icon(Icons.language),
-                  title: Text(translate(context)!.language),
+                  title: Text(
+                    translate(context)!.language,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                   onPressed: (context) => showModalBottomSheet(
                         elevation: 10,
                         context: context,
@@ -85,7 +91,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       )),
               SettingsTile.navigation(
                   leading: Icon(Icons.font_download_outlined),
-                  title: Text(translate(context)!.font),
+                  title: Text(
+                    translate(context)!.font,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                   onPressed: (context) => showModalBottomSheet(
                         elevation: 10,
                         context: context,
