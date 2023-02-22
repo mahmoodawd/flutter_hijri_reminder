@@ -1,12 +1,18 @@
 # Hijri_Reminder
 
-A new Flutter project.
+A flutter reminder app dealing with hijri dates
 
-## Getting Started
+## Main Features:
+1- Convert any gregorian date to the corresponding Hijri date.
 
-This project is a starting point for a Flutter application.
+2- Get reminded of the various important Hijri events like Ramadan and Eid.
 
-![Gif of Application](https://github.com/mahmoodawd/flutter_hijri_reminder/blob/main/GIFs/create_new_event.gif?raw=true)
+3- Save own events to get reminded later.
+
+
+Creating new event.        |   Saving public events.          |  Preferences.
+:-------------------------:|:-------------------------:|:-------------------------
+![](https://github.com/mahmoodawd/flutter_hijri_reminder/blob/main/GIFs/create_new_event.gif)   |  ![](https://github.com/mahmoodawd/flutter_hijri_reminder/blob/main/GIFs/save_public_event.gif) |  ![](https://github.com/mahmoodawd/flutter_hijri_reminder/blob/main/GIFs/language_font_darkMode.gif)
 
 A few resources to get you started if this is your first Flutter project:
 
