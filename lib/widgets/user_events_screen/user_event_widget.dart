@@ -25,7 +25,7 @@ class UserEventWidget extends StatelessWidget {
           title: Center(
             child: Text(
               this.title!,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
           trailing: Row(

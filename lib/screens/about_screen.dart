@@ -29,12 +29,12 @@ class AboutScreen extends StatelessWidget {
             ),
             Text(
               'Hijri Reminder',
-              style: appTextTheme.bodyText2!.copyWith(fontSize: 26),
+              style: appTextTheme.bodyText1!.copyWith(fontSize: 26),
               textAlign: TextAlign.center,
             ),
             Text(
               translate(context)!.appDescription,
-              style: appTextTheme.bodyText2!.copyWith(fontSize: 14),
+              style: appTextTheme.bodyText1!.copyWith(fontSize: 14),
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -42,7 +42,7 @@ class AboutScreen extends StatelessWidget {
             ),
             Text(
               translate(context)!.contact,
-              style: appTextTheme.bodyText2!
+              style: appTextTheme.bodyText1!
                   .copyWith(fontSize: 16, fontWeight: FontWeight.normal),
               textAlign: TextAlign.center,
             ),

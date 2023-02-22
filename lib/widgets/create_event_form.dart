@@ -30,7 +30,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
     return AlertDialog(
       title: Text(
         translate(context)!.createEvent,
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       content: Form(
         key: _eventCreationFormKey,

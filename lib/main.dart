@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hijri_reminder/providers/fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,12 +29,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
   LanguagesProvider languagesProvider = new LanguagesProvider();
+  FontProvider fontProvider = new FontProvider();
 
   @override
   void initState() {
     super.initState();
     getCurrentAppTheme();
     getCurrentAppLanguage();
+    getCurrentFont();
   }
 
   void getCurrentAppTheme() async {
@@ -44,6 +47,10 @@ class _MyAppState extends State<MyApp> {
   void getCurrentAppLanguage() async {
     languagesProvider.locale =
         await languagesProvider.languagePreferences.getLocale();
+  }
+
+  void getCurrentFont() async {
+    fontProvider.fontFamily = await fontProvider.fontPreferences.getFont();
   }
 
   @override
@@ -61,6 +68,9 @@ class _MyAppState extends State<MyApp> {
           ),
           ChangeNotifierProvider.value(
             value: languagesProvider,
+          ),
+          ChangeNotifierProvider.value(
+            value: fontProvider,
           ),
         ],
         child: Consumer<DarkThemeProvider>(

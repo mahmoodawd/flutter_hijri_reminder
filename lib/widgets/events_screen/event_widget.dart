@@ -6,12 +6,14 @@ class EventWidget extends StatefulWidget {
   final String title;
   final Widget date;
   final VoidCallback action;
+  final String subtitle;
 
   EventWidget(
       {key,
       required this.itemExist,
       required this.date,
       required this.title,
+      required this.subtitle,
       required this.action});
 
   @override
@@ -32,7 +34,13 @@ class _EventWidgetState extends State<EventWidget> {
             title: Center(
               child: Text(
                 this.widget.title,
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            subtitle: Center(
+              child: Text(
+                this.widget.subtitle,
+                style: Theme.of(context).textTheme.subtitle1,
               ),
             ),
             trailing: IconButton(

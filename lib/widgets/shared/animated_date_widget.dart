@@ -27,7 +27,7 @@ class _AnimatedDateWidgetState extends State<AnimatedDateWidget> {
         curve: Curves.easeInOut, //animation style
         child: Text(
           !_toggleDate ? widget.primaryDate : widget.alternativeDate,
-          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 fontWeight: FontWeight.normal,
               ),
         ),

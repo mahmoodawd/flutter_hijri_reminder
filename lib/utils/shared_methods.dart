@@ -22,11 +22,14 @@ void showCustomSnakBar({
   ));
 }
 
-void addNewEvent(BuildContext context, dynamic userEventItem) {
+void addNewEvent(BuildContext context, dynamic userEventItem,
+    {bool translateTitle = false}) {
   Provider.of<UserEvents>(context, listen: false).addNewEvent(
       userEventItem.eventId,
       userEventItem.date,
-      translate(context)!.publicIslamicEvents(userEventItem.title),
+      translateTitle
+          ? translate(context)!.publicIslamicEvents(userEventItem.title)
+          : userEventItem.title,
       true);
 
   NotificationService()

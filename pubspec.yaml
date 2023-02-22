@@ -91,5 +91,8 @@ flutter:
       fonts:
         - asset: assets/fonts/Tajawal-Regular.ttf
           weight: 500
-        
+    - family: Rakkas
+      fonts:
+        - asset: assets/fonts/Rakkas-Regular.ttf
+          weight: 500
 

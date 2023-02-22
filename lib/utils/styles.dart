@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hijri_reminder/providers/fonts.dart';
+import 'package:provider/provider.dart';
 
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      fontFamily: 'Tajawal',
+      fontFamily: Provider.of<FontProvider>(context).fontFamily,
       disabledColor: Colors.grey,
       appBarTheme: AppBarTheme(elevation: 5.0),
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
@@ -15,9 +17,13 @@ class Styles {
           fontWeight: FontWeight.bold,
           color: isDarkTheme ? Colors.white : Colors.green.shade500,
         ),
-        bodyText2: TextStyle(
+        bodyText1: TextStyle(
           color: isDarkTheme ? Colors.white : Colors.green.shade500,
           fontSize: 16.0,
+        ),
+        subtitle1: TextStyle(
+          color: isDarkTheme ? Colors.white : Colors.green.shade500,
+          fontSize: 10.0,
           fontWeight: FontWeight.w500,
         ),
       ),

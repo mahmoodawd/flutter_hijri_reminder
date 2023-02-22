@@ -18,11 +18,13 @@
     }
   }
 },
+
 "notificationBody" : "Today is : ",
 "forYear" : "for",
 "preferences" : "Preferences",
 "appDescription" : "Reminder app in Hijri",
 "contact" : "You can reach us at:",
+"fontSample" : "Font will be like this",
 
 "createEvent" : "Create Event",
 "settings" : "Settings",
